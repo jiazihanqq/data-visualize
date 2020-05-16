@@ -1,0 +1,5 @@
+{
+  "ext": "js",
+  "watch": ["dist/**/*.js"],
+  "exec": "node dist"
+}
