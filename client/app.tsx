@@ -5,7 +5,6 @@ import Header from './Editor/Header';
 import MainPanel from './Editor/MainPanel';
 import Properties from './Editor/Properties';
 import Selection from './Editor/Selection';
-import './index.css';
 
 
 const App = () =>{
