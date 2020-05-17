@@ -1,6 +1,6 @@
 import requireDirectory from "require-directory";
 import Router from "koa-router";
-import {chartDetail, chartCategory} from '../models/chart';
+import {sequelize} from "./db";
 
 export class InitManager {
     // 入口方法
@@ -9,7 +9,7 @@ export class InitManager {
     }
 
     static initLoadRouters(app: any) {
-        const apiDirectory = `${process.cwd()}/app/api`;
+        const apiDirectory = `../api`;
         requireDirectory(module, apiDirectory, {
             visit: obj => {
                 if (obj instanceof Router) {
@@ -20,6 +20,13 @@ export class InitManager {
     }
 
     static initDB() {
-
+        sequelize.authenticate().then(() => {
+            console.log('链接正常')
+        }).catch(() => {
+            console.log('链接错误！')
+        });
+        sequelize.sync({force: true}).then(() => {
+            console.log('sync ok');
+        });
     }
 }

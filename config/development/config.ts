@@ -6,7 +6,7 @@ const db:IDBConfig = {
     port: 3306,
     dbName:'data_visualize',
     user:'root',
-    password:'root',
+    password:'1qaz@WSX',
 };
 export const dev_setting = {
     db, port,

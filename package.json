@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently npm:dev:*",
+    "dev": "NODE_ENV=dev concurrently npm:dev:*",
     "dev:server": "tsc -w",
     "dev:server-watch": "nodemon ./dist/server/index.js",
     "dev:client": "webpack-dev-server --config ./config/development/webpack.dev.js",

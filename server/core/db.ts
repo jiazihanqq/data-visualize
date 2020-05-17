@@ -1,5 +1,6 @@
 import {Sequelize} from 'sequelize';
 import config from "../../config/config";
+import {Chart} from "../models/chart";
 
 const {
     dbName,
@@ -9,24 +10,12 @@ const {
     password,
 } = config.db;
 
-export const sequelize = new Sequelize(dbName,user,password,{
+export const sequelize = new Sequelize(dbName, user, password, {
     dialect: "mysql",
     host,
     port,
-    logging: false,
+    logging: true,
     timezone: '+08:00',
-    define: {
-
-    }
+    define: {}
 });
-
-sequelize.authenticate().then(()=>{
-    console.log('链接正常')
-}).catch(()=>{
-    console.log('链接错误！')
-})
-
-// 同步到数据库
-sequelize.sync({force:true}).then(()=>{
-    console.log('sync ok');
-});
+new Chart(sequelize);

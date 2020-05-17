@@ -6,6 +6,7 @@ const path = require('path');
 
 module.exports = merge(baseWebpackConfig, {
     mode: 'development',
+
     devServer: {
         port: '8080',
         contentBase: path.join(__dirname, './dist'),
@@ -26,6 +27,9 @@ module.exports = merge(baseWebpackConfig, {
             },
             hash: false
         }),
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': '"dev"'
+        }),
     ]
 });
