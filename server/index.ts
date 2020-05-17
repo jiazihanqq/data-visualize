@@ -1,9 +1,16 @@
 import Koa from 'koa';
-import editor from './api/v1/editor'
-import manager from './api/v1/manager'
-
+import setting from './../config/config';
+import {InitManager} from './core';
+import parser from 'koa-bodyparser';
+console.log(0)
 const app = new Koa();
 
-app.use(editor.routes());
-app.use(manager.routes());
-app.listen(4000);
+
+app.use(parser());
+console.log(1);
+InitManager.initCore(app);
+console.log(2)
+InitManager.initDB();
+
+app.listen(3000);
+// app.listen(setting.port);

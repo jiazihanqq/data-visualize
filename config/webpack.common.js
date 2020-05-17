@@ -8,7 +8,7 @@ module.exports = {
     },
     output: {
         filename: "[name].[hash:16].js",
-        path: path.resolve(__dirname, '../dist/client')
+        path: path.resolve(__dirname, './dist/client')
     },
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],

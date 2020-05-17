@@ -2,7 +2,11 @@ import Router from 'koa-router'
 
 const router = new Router();
 
-router.get('/v1/editor/chartlist',async (ctx, next)=>{
+router.post('/v1/editor/chartList',async (ctx, next)=>{
+    // ctx.params;
+    // ctx.request.query;
+    // ctx.request.header;
+    // ctx.request.body;
     ctx.body = {};
 });
 
