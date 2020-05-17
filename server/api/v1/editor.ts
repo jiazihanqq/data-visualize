@@ -9,5 +9,4 @@ router.post('/v1/editor/chartList',async (ctx, next)=>{
     // ctx.request.body;
     ctx.body = {};
 });
-
 export default router;

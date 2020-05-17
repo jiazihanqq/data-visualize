@@ -1,7 +1,6 @@
 import requireDirectory from "require-directory";
 import Router from "koa-router";
 import {sequelize} from "./db";
-
 export class InitManager {
     // 入口方法
     static initCore(app: any) {
@@ -9,11 +8,12 @@ export class InitManager {
     }
 
     static initLoadRouters(app: any) {
-        const apiDirectory = `../api`;
-        requireDirectory(module, apiDirectory, {
-            visit: obj => {
-                if (obj instanceof Router) {
-                    app.use(obj.routes);
+        const apiDirectory = `./../api`;
+            requireDirectory(module, apiDirectory, {
+            visit: (obj:any) => {
+                const route = obj.default;
+                if (route instanceof Router) {
+                    app.use(route.routes());
                 }
             }
         });
