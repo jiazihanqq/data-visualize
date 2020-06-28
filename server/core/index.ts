@@ -6,7 +6,7 @@ export class InitManager {
     static initCore(app: any) {
         InitManager.initLoadRouters(app);
     }
-
+    //  初始化路由
     static initLoadRouters(app: any) {
         const apiDirectory = `./../api`;
             requireDirectory(module, apiDirectory, {
@@ -19,6 +19,7 @@ export class InitManager {
         });
     }
 
+    //  初始化数据库
     static initDB() {
         sequelize.authenticate().then(() => {
             console.log('链接正常')
