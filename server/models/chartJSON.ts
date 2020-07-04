@@ -1,6 +1,11 @@
 import { DATE, INTEGER, STRING } from "sequelize";
-export class Chart {
+import { chartCategorySQL } from "../SQL/chartCategory";
+import { asyncForEach } from "../utils";
+import { chartJSONSQL } from "../SQL/chartJSON";
+
+export class ChartJSON {
   private db: any;
+  public chartCategoryModel: any;
 
   constructor(sequelize: any) {
     this.db = sequelize;
@@ -9,7 +14,7 @@ export class Chart {
   }
 
   async createCategory() {
-    const chartCategory = this.db.define(
+    this.chartCategoryModel = this.db.define(
       "chartCategory",
       {
         id: {
@@ -23,11 +28,9 @@ export class Chart {
       },
       {
         hooks: {
-          afterSync: async () => {
-            await chartCategory.create({
-              type: "bar",
-              chartMap: "STRING",
-              properties: "STRING",
+          afterSync: () => {
+            asyncForEach(chartCategorySQL, async (record) => {
+              await this.chartCategoryModel.create(record);
             });
           },
         },
@@ -50,11 +53,9 @@ export class Chart {
       },
       {
         hooks: {
-          afterSync: async () => {
-            await chartJSON.create({
-              name: "bar",
-              category: "STRING",
-              properties: "STRING",
+          afterSync: () => {
+            asyncForEach(chartJSONSQL, async (record) => {
+              await chartJSON.create(record);
             });
           },
         },

@@ -1,8 +1,6 @@
-import React from 'react';
-import { render } from 'react-dom';
-import App from './app';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./app";
+import "antd/dist/antd.less";
 
-const renderApp = (Component: React.ComponentType) => {
-    render(<Component />, document.getElementById('app'));
-};
-renderApp(App);
+ReactDOM.render(<App />, document.getElementById("app"));

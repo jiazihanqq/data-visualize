@@ -1,20 +1,22 @@
-import React from 'react';
-import {Provider} from 'react-redux';
-import {store} from './store';
-import Header from './Editor/Header';
-import MainPanel from './Editor/MainPanel';
-import Properties from './Editor/Properties';
-import Selection from './Editor/Selection';
-
-
-const App = () =>{
-    return (
-        <Provider store={store}>
-            <Header key="header"/>
-            <MainPanel key="main"/>
-            <Properties key="main"/>
-            <Selection key="main"/>
-        </Provider>
-    )
-}
+import React from "react";
+import { Provider } from "react-redux";
+import { store } from "./store";
+import Header from "./Editor/Header";
+import Canvas from "./Editor/Canvas";
+import Properties from "./Editor/Panel/PropsPanel/JSONPanel";
+import ChartPanel from "./Editor/Panel/PropsPanel/ChartPanel";
+import './style.less'
+import PropsPanel from "./Editor/Panel/PropsPanel";
+const App: React.FC = () => {
+  return (
+    <Provider store={store}>
+      <div className="app-constainer">
+        <Header key="header" />
+        <Canvas key="canvas" />
+        <PropsPanel key="properties" context={''}/>
+        <ChartPanel key="selection" />
+      </div>
+    </Provider>
+  );
+};
 export default App;

@@ -1,14 +1,21 @@
-import { axios } from "../api";
+import { axios } from "./";
 
+enum ChartID {
+  bar = 1,
+  pie,
+  map,
+}
 type ChartListReq = {
   id: number;
   auth?: boolean;
 };
+export type ChartInfo = {
+  id: number;
+  type: ChartID;
+  chartMap: string;
+  properties: string;
+};
 
-export type ChartListRes = {
-
-}
-
-export const getChartList = async (req: ChartListReq) => {
-  return await axios.post("/editor/getChartList", req);
+export const getChartList = async (req?: ChartListReq) => {
+  return axios.post<null, ChartInfo[]>("/v1/chart/chartList", req);
 };

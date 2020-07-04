@@ -1,6 +1,7 @@
 import config from "../../config/config";
-import { Chart } from "../models/chart";
+import { ChartCategory } from "../models/chartCategory";
 import { Sequelize } from "sequelize";
+import {ChartJSON} from "../models/chartJSON";
 
 const { dbName, host, port, user, password } = config.db;
 
@@ -12,5 +13,5 @@ export const sequelize = new Sequelize(dbName, user, password, {
   timezone: "+08:00",
   define: {},
 });
-sequelize.sync({ force: true });
-new Chart(sequelize);
+new ChartCategory(sequelize);
+new ChartJSON(sequelize);
