@@ -1,17 +1,15 @@
 const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-
 module.exports = {
   entry: {
     app: "./client/index.tsx",
     vendor: ["react", "react-dom"],
   },
-  output: {
-    filename: "[name].[hash:16].js",
-    path: path.resolve(__dirname, "./dist/client"),
-  },
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
+    alias: {
+      "@": path.join(__dirname, "client"),
+    },
   },
   module: {
     rules: [
@@ -23,8 +21,8 @@ module.exports = {
           {
             loader: "less-loader",
             options: {
-              javascriptEnabled: true
-            }
+              javascriptEnabled: true,
+            },
           },
         ],
       },
@@ -33,25 +31,6 @@ module.exports = {
         use: ["babel-loader", "ts-loader"],
         exclude: /node_modules/,
       },
-      {
-        test: /\.js?$/,
-        use: "babel-loader",
-        include: path.resolve(__dirname, "../client"),
-      },
     ],
   },
-  optimization: {
-    splitChunks: {
-      chunks: "all",
-      minChunks: 1,
-      minSize: 0,
-      cacheGroups: {
-        vendor: {
-          test: "vendor",
-          name: "vendor",
-        },
-      },
-    },
-  },
-  plugins: [new CleanWebpackPlugin()],
 };

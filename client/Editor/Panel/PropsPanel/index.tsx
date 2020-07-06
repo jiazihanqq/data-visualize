@@ -1,7 +1,7 @@
-import React, {useState} from "react";
-import {Button, Menu} from "antd";
-import {MenuFoldOutlined, MenuUnfoldOutlined} from "@ant-design/icons";
-import './style.less'
+import React, { useState } from "react";
+import { Button, Menu } from "antd";
+import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
+import "./style.less";
 
 interface IProps {
   // context?: React.FC;
@@ -9,8 +9,6 @@ interface IProps {
 }
 
 const PropsPanel: React.FC<IProps> = (props) => {
-  const { context } = props;
-  const { SubMenu } = Menu;
   const [loading, setLoading] = useState(true);
   const [collapsed, setCollapsed] = useState(true);
   return (
@@ -24,13 +22,7 @@ const PropsPanel: React.FC<IProps> = (props) => {
       >
         {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined)}
       </Button>
-      <Menu
-        defaultSelectedKeys={["1"]}
-        defaultOpenKeys={["1"]}
-        inlineCollapsed={collapsed}
-      >
-        {context}
-      </Menu>
+        {props.children}
     </div>
   );
 };
