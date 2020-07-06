@@ -1,31 +1,27 @@
-import {dev_setting} from './development/config'
-import {prod_setting} from './production/config'
-
-export interface IDBConfig {
-    dbName:string,
-    host: string,
-    port: number;
-    user:string,
-    password:string,
+interface IDBConfig {
+  dbName: string;
+  host: string;
+  port: number;
+  user: string;
+  password: string;
 }
-export interface IConfig {
-    port: number;
-    db: IDBConfig;
-}
-// fixme 写法好撮
-let config: IConfig = {
-    port: 0,
-    db: {
-        dbName:'',
-        host: '',
-        port: 0,
-        user:'',
-        password:'',
-    }
+export const dev_setting: { db: IDBConfig; port: number } = {
+  db: {
+    host: "localhost",
+    port: 3306,
+    dbName: "data_visualize",
+    user: "root",
+    password: "1qaz@WSX",
+  },
+  port: 8081,
 };
-if (process.env.NODE_ENV === 'dev') {
-    config = dev_setting;
-} else if (process.env.NODE_ENV === 'prod') {
-    config = prod_setting;
-}
-export default config;
+export const prod_setting: { db: IDBConfig; port: number } = {
+  db: {
+    host: "localhost",
+    port: 3306,
+    dbName: "data_visualize",
+    user: "root",
+    password: "1qaz@WSX",
+  },
+  port: 8081,
+};

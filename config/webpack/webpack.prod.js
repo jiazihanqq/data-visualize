@@ -2,7 +2,7 @@ const path = require("path");
 const fs = require("fs");
 const webpack = require("webpack");
 const merge = require("webpack-merge");
-const baseWebpackConfig = require("../webpack.common");
+const baseWebpackConfig = require("./webpack.common");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const appDirectory = fs.realpathSync(process.cwd());
@@ -15,12 +15,7 @@ module.exports = merge(baseWebpackConfig, {
     publicPath: "/",
     path: resolveApp("dist/client"),
     filename: "src/js/[name].[hash:16].js",
-    chunkFilename: "src/js/[name].chunk.[hash:16].js",
-  },
-  optimization: {
-    splitChunks: {
-      chunks: "all",
-    },
+    chunkFilename: "src/js/chunks/[name].chunk.[hash:16].js",
   },
   plugins: [
     new CleanWebpackPlugin(),
@@ -33,8 +28,5 @@ module.exports = merge(baseWebpackConfig, {
       hash: true,
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.DefinePlugin({
-      "process.env.NODE_ENV": '"prod"',
-    }),
   ],
 });

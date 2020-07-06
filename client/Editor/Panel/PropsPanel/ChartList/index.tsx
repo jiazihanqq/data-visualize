@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Menu } from "antd";
 import { ChartInfo, getChartList } from "../../../../api/editor";
-
 interface IProps {
   collapsed?: boolean;
   loading?: boolean;
 }
-const ChartList:React.FC<IProps> = (props) => {
+
+const ChartList: React.FC<IProps> = (props) => {
   const { SubMenu } = Menu;
   const [chartList, setChartList] = useState<ChartInfo[]>([]);
-  console.log('ChartList');
+  console.log('lalalalala');
   useEffect(() => {
     getChartList().then((data) => {
       setChartList(data);
     });
   }, []);
+
   return (
     <Menu
       defaultSelectedKeys={["1"]}
@@ -24,7 +25,7 @@ const ChartList:React.FC<IProps> = (props) => {
       {chartList.map((chart: ChartInfo) => {
         return (
           <SubMenu key={chart.id} title={chart.type}>
-            {chart.properties}
+            {chart.chartMap}
           </SubMenu>
         );
       })}

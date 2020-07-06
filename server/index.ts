@@ -1,5 +1,5 @@
 import Koa from 'koa';
-import setting from './../config/config';
+import setting from './config/config';
 import {InitManager} from './core';
 import {router} from './api/v1/chart'
 

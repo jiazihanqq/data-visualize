@@ -1,4 +1,4 @@
-import config from "../../config/config";
+import config from "../config/config";
 import { ChartCategory } from "../models/chartCategory";
 import { Sequelize } from "sequelize";
 import {ChartJSON} from "../models/chartJSON";

@@ -2,7 +2,7 @@ const webpack = require("webpack");
 const path = require("path");
 const fs = require("fs");
 const merge = require("webpack-merge");
-const baseWebpackConfig = require("../webpack.common");
+const baseWebpackConfig = require("./webpack.common");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const appDirectory = fs.realpathSync(process.cwd());
@@ -14,27 +14,26 @@ module.exports = merge(baseWebpackConfig, {
     publicPath: "/",
     path: resolveApp("build"),
     filename: "static/js/[name].js",
-    chunkFilename: "static/js/[name].chunk.js",
+    chunkFilename: "static/js/chunks/[name].chunk.js",
   },
   devServer: {
-    port: "8080",
-    contentBase: path.resolve("../dist/client"),
+    port: 8080,
+    contentBase: resolveApp("build"),
     compress: true,
     historyApiFallback: true,
     hot: true,
     https: false,
     noInfo: true,
-    open: true,
-    proxy: {
-      "/v1": { target: "http://127.0.0.1:8081", changeOrigin: true },
-    },
+    open: false,
+    proxy: [
+      {
+        context: ["/v1"],
+        target: "http://127.0.0.1:8081",
+        changeOrigin: true,
+      },
+    ],
   },
-  optimization: {
-    splitChunks: {
-      chunks: "all",
-    },
-  },
-  devtool: "inline-cheap-module-source-map",
+  devtool: "cheap-module-source-map",
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
@@ -46,8 +45,5 @@ module.exports = merge(baseWebpackConfig, {
       hash: false,
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.DefinePlugin({
-      "process.env.NODE_ENV": '"dev"',
-    }),
   ],
 });

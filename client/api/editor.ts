@@ -1,10 +1,6 @@
 import { axios } from "./index";
+import {ChartID} from "../../definations";
 
-enum ChartID {
-  bar = 1,
-  pie,
-  map,
-}
 type ChartListReq = {
   id: number;
   auth?: boolean;
@@ -16,6 +12,6 @@ export type ChartInfo = {
   properties: string;
 };
 
-export const getChartList = async (req?: ChartListReq) => {
+export const getChartList = (req?: ChartListReq) => {
   return axios.post<null, ChartInfo[]>("/v1/chart/chartList", req);
 };
